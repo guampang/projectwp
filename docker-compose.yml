@@ -8,6 +8,8 @@ services:
       MYSQL_DATABASE: wp
       MYSQL_USER: userwp
       MYSQL_PASSWORD: sukses123
+    ports:
+    - "3306:3306"
     volumes:
     - ./mysql:/var/lib/mysql
 

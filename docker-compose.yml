@@ -1,5 +1,6 @@
-version: '3'
+version: '3' #versi docker-compose yang digunakan
 services:
+  #definisikan service yang mau dijalankan, untuk wp ada 3 (db,webserver,php)
   db:
     image: mariadb:latest
     restart: always
@@ -8,19 +9,18 @@ services:
       MYSQL_DATABASE: wp
       MYSQL_USER: userwp
       MYSQL_PASSWORD: sukses123
-    volumes:
+    volumes: #aku mau persistent storage folder mysql di lokal mounting /var/lib/mysql di container
     - ./mysql:/var/lib/mysql
 
   web:
     image: nginx:latest
-    ports:
+    ports: #ekspose port biar bisa diakses dari internet port 80
     - "80:80"
     volumes:
-    - ./code:/code
-    - ./site.conf:/etc/nginx/conf.d/site.conf
+    - ./code:/code #persistent volume untuk menempatkan file website
+    - ./site.conf:/etc/nginx/conf.d/site.conf #bikin konfigurasi nginx, root foldernya dikasi /code
 
   php:
-    #Build menggunakan dockerfile
-    build: ./
-    volumes:
+    build: ./ #Build php menggunakan Dockerfile
+    volumes: #phpnya mau bisa dieksekusi dimana ? difolder tempat websitenya dong yaitu /code
     - ./code:/code

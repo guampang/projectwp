@@ -20,8 +20,8 @@ services:
     volumes:
     - ./code:/code
     - ./site.conf:/etc/nginx/conf.d/site.conf
-    links:
-    - php
+  #  links:
+  #  - php
   #  - db
 
   php:

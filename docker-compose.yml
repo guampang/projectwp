@@ -8,8 +8,6 @@ services:
       MYSQL_DATABASE: wp
       MYSQL_USER: userwp
       MYSQL_PASSWORD: sukses123
-#    ports:
- #   - "3306:3306"
     volumes:
     - ./mysql:/var/lib/mysql
 
@@ -20,12 +18,9 @@ services:
     volumes:
     - ./code:/code
     - ./site.conf:/etc/nginx/conf.d/site.conf
-  #  links:
-  #  - php
-  #  - db
 
   php:
-    #image: php:7-fpm
+    #Build menggunakan dockerfile
     build: ./
     volumes:
     - ./code:/code

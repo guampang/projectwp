@@ -10,7 +10,6 @@ services:
       MYSQL_PASSWORD: sukses123
     volumes:
     - ./mysql:/var/lib/mysql
-    network: app-network
 
   web:
     image: nginx:latest
@@ -22,16 +21,9 @@ services:
     links:
     - php
   #  - db
-    network: app-network
 
   php:
     #image: php:7-fpm
     build: ./
     volumes:
     - ./code:/code
-    network: app-network
-
-  #Docker Networks
-  networks:
-    app-network:
-      driver: bridge

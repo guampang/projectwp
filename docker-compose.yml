@@ -16,9 +16,11 @@ services:
     image: nginx:latest
     ports: #ekspose port biar bisa diakses dari internet port 80
     - "80:80"
+    - "443:443"
     volumes:
     - ./code:/code #persistent volume untuk menempatkan file website
     - ./site.conf:/etc/nginx/conf.d/site.conf #bikin konfigurasi nginx, root foldernya dikasi /code
+    - ./certs:/etc/nginx/certs
 
   php:
     build: ./ #Build php menggunakan Dockerfile

@@ -1,0 +1,38 @@
+db:
+  image: mariadb:latest
+  restart: always
+  environment:
+    MYSQL_ROOT_PASSWORD: imgroot
+    MYSQL_DATABASE: wp
+    MYSQL_USER: userwp
+    MYSQL_PASSWORD: sukses123
+  volumes:
+  - ./mysql:/var/lib/mysql
+  networks:
+  - app-network
+
+web:
+  image: nginx:latest
+  ports:
+  - "80:80"
+  volumes:
+  - ./code:/code
+  - ./site.conf:/etc/nginx/conf.d/site.conf
+  links:
+  - php
+#  - db
+  networks:
+  - app-network
+
+php:
+  #image: php:7-fpm
+  build: ./
+  volumes:
+  - ./code:/code
+  networks:
+  - app-network
+
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge

@@ -10,7 +10,7 @@ services:
       MYSQL_USER: userwp
       MYSQL_PASSWORD: sukses123
     volumes: #aku mau persistent storage folder mysql di lokal mounting /var/lib/mysql di container
-    - ./mysqlku:/var/lib/mysql
+    - ./mysql:/var/lib/mysql
 
   web:
     image: nginx:latest
